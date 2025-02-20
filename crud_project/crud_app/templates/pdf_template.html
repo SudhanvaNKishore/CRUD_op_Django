@@ -36,7 +36,6 @@
     <table class="table">
         <thead>
             <tr>
-                <th>SL.No</th>
                 <th>ID</th>
                 <th>Name</th>
                 <th>Email</th>
@@ -45,7 +44,6 @@
         <tbody>
             {% for student in students %}
             <tr>
-                <td>{{ forloop.counter }}</td> <!-- SL.No -->
                 <td>{{ student.id }}</td>      <!-- ID -->
                 <td>{{ student.name }}</td>    <!-- Name -->
                 <td>{{ student.email }}</td>   <!-- Email -->

@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from .models import Student
 from django.contrib import messages
-from django.db.models import Q
+from django.db.models import Q, Max
 from django.http import HttpResponse
 from django.template.loader import get_template
 from xhtml2pdf import pisa
@@ -14,7 +14,9 @@ def index(request):
         if "add" in request.POST:
             name = request.POST.get("name")
             email = request.POST.get("email")
-            Student.objects.create(name=name, email=email)
+            # Get the next available ID
+            next_id = Student.objects.aggregate(max_id=Max('id'))['max_id'] + 1 if Student.objects.exists() else 1
+            Student.objects.create(id=next_id, name=name, email=email)
             messages.success(request, "New student added successfully")
 
         elif "delete" in request.POST:
