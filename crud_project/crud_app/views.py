@@ -33,7 +33,7 @@ def index(request):
 
         elif "search" in request.POST:
             query = request.POST.get("searchquery")
-            students = Student.objects.filter(Q(name__icontains=query) | Q(email__icontains=query))
+            students = Student.objects.filter(Q(name__startswith=query) | Q(email__startswith=query))
 
     context = {"students": students, "query": query}
     return render(request, "index.html", context=context)
